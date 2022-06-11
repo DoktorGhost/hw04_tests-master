@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block header %}Последние обновления на сайте{% endblock %}
+{% block content %}
+
+    {% for post in page %}
+        <h3>
+            <a name="post_{{ post.id }}" href="{% url 'profile' post.author.username %}">
+                Автор: {{ post.author.get_full_name }}
+            </a>
+            , Дата публикации: {{ post.pub_date|date:"d M Y" }}
+        </h3>
+        <p>{{ post.text|linebreaksbr }}</p>
+        {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+
+    <div class="col-md-6 offset-md-4">
+    {% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator %}
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="card mb-3 mt-1 shadow-sm">
+<!-- Отображение текста поста -->
+<div class="card-body">
+    <p class="card-text">
+      <!-- Ссылка на автора через @ -->
+      <a name="post_{{ post.id }}" href="{% url 'profile' post.author.username %}">
+        <strong class="d-block text-gray-dark">@{{ post.author }}</strong>
+      </a>
+      {{ post.text|linebreaksbr }}
+    </p>
+
+    <!-- Отображение ссылки на комментарии -->
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        Комментариев: <a href="{% url 'post' post.author.username post.id %}">
+          {{ post.comments.count }}
+        </a>
+      </div>
+
+      <div class="btn-group">
+        <!-- Ссылка на редактирование поста для автора -->
+        {% if user == post.author %}
+        <a class="btn btn-sm btn-primary" href="{% url 'post_edit' post.author.username post.id %}" role="button">
+          Редактировать
+        </a>
+        {% endif %}
+      </div>
+      <!-- Дата публикации поста -->
+      <small class="text-muted">{{ post.pub_date }}</small>
+    </div>
+</div>
+</div>
