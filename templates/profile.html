@@ -38,9 +38,8 @@
                                 {% include 'post_item.html' %}
                         {% endfor %}
 
-                        {% include "paginator.html" %}
+                        {% include "paginator.html" with items=page paginator=paginator %}
 
-                <!-- Здесь постраничная навигация паджинатора -->
                 </div>
         </div>
 </main>

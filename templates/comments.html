@@ -1,18 +1,26 @@
 <!-- Комментарии -->
-
-{% for item in comments %}
-    <div class="media card mb-4 col-xl-12">
-        <div class="media-body card-body">
-                <h5 class="mt-0">
-                    <a href="{% url 'profile' item.author.username %}"
-                       name="comment_{{ item.id }}">
-                        {{ item.author.username }}
-                    </a>
-                </h5>
-                <p>{{ item.text | linebreaksbr }}</p>    
-        </div>
-    </div>
+{% for item in page %}
+<div class="card col-xl-11 mb-3 mt-1 shadow-sm">
+    <div class="card-body">
+        <p class="card-text">
+            <h5 class="mt-0">
+                <a href="{% url 'profile' item.author.username %}"
+                   name="comment_{{ item.id }}">
+                    {{ item.author.first_name}}
+                </a>
+            </h5>
+            <small>{{ item.text|linebreaksbr }}</small><br>
+            <i><small class="text-muted">{{ item.created}}</small></i>  
+        </p>
+    </div>     
+</div>
 {% endfor %}
+
+{% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator %}
+{% endif %}
+
+
 
 <!-- Форма добавления комментария -->
 {% load user_filters %}

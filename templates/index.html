@@ -11,6 +11,10 @@
             , Дата публикации: {{ post.pub_date|date:"d M Y" }}
         </h3>
         <p>{{ post.text|linebreaksbr }}</p>
+        <p>Комментариев: <a href="{% url 'post' post.author.username post.id %}">
+            {{ post.comments.count }}
+        </a>
+        </p>
         {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
 
