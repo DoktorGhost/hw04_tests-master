@@ -18,8 +18,8 @@ from django.urls import include, path
 from django.contrib.flatpages import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path("", include("posts.urls")),
+    path('admin/', admin.site.urls),
     path('auth/', include('users.urls')),
     path('about/', include('django.contrib.flatpages.urls')),
     path('auth/', include('django.contrib.auth.urls')),
